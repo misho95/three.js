@@ -1,22 +1,36 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { TextureLoader } from "three";
+import MoonMesh from "./component/moon";
+import StarMesh from "./component/star.mesh";
+
+const positions = Array.from({ length: 1000 }, (_, index) => [
+  Math.random() * 20 - 10, // Random X position between -10 and 10
+  Math.random() * 20 - 10, // Random Y position between -10 and 10
+  Math.random() * 20 - 10, // Random Z position between -10 and 10
+]);
 
 function App() {
-  const loader = new TextureLoader();
-  const loadedTexture = loader.load("src/assets/moon.jpg");
-
   return (
     <div className="w-full h-screen ">
       <Canvas>
-        <color attach="background" args={["#141622"]} />
-        <OrbitControls autoRotate={true} enableZoom={false} enablePan={false} />
-        <mesh>
-          <ambientLight intensity={0.1} />
-          <directionalLight position={[5, 10, 10]} />
-          <sphereGeometry args={[1.5, 64, 32]} />
-          <meshStandardMaterial color={"white"} map={loadedTexture} />
-        </mesh>
+        <color attach="background" args={["black"]} />
+        <OrbitControls
+          enableRotate={true}
+          autoRotate={true}
+          autoRotateSpeed={0.2}
+          enableZoom={false}
+          enablePan={false}
+          minPolarAngle={Math.PI / 2}
+          maxPolarAngle={Math.PI / 2}
+        />
+
+        <ambientLight intensity={0.5} />
+        <directionalLight color={"white"} position={[20, 10, 10]} />
+
+        <MoonMesh />
+        {positions.map((position, index) => {
+          return <StarMesh key={index} position={position} />;
+        })}
       </Canvas>
     </div>
   );
