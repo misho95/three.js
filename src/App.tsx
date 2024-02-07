@@ -1,24 +1,18 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import PlanetMesh from "./component/planet";
-import StarMesh from "./component/star.mesh";
 import Header from "./component/header";
-
-const stars = Array.from({ length: 2000 }, (_, index) => ({
-  position: [
-    Math.random() * 20 - 10,
-    Math.random() * 20 - 10,
-    Math.random() * 20 - 10,
-  ],
-  size: Math.random() * (0.009 - 0.001) + 0.001,
-}));
 
 function App() {
   return (
     <div className="w-full h-screen ">
       <Header />
-      <Canvas>
-        <color attach="background" args={["black"]} />
+      <Canvas
+        style={{
+          background: "url(src/assets/stars.jpg) center no-repeat",
+          backgroundSize: "cover",
+        }}
+      >
         <OrbitControls
           enableRotate={true}
           autoRotate={true}
@@ -29,9 +23,6 @@ function App() {
           maxPolarAngle={Math.PI / 2}
         />
         <PlanetMesh />
-        {stars.map((s, index) => {
-          return <StarMesh key={index} position={s.position} size={s.size} />;
-        })}
       </Canvas>
     </div>
   );
