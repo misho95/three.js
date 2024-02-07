@@ -2,19 +2,21 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import MoonMesh from "./component/moon";
 import StarMesh from "./component/star.mesh";
+import Header from "./component/header";
 
-const stars = Array.from({ length: 1000 }, (_, index) => ({
+const stars = Array.from({ length: 2000 }, (_, index) => ({
   position: [
     Math.random() * 20 - 10,
     Math.random() * 20 - 10,
     Math.random() * 20 - 10,
   ],
-  size: Math.random() * 0.01,
+  size: Math.random() * (0.009 - 0.001) + 0.001,
 }));
 
 function App() {
   return (
     <div className="w-full h-screen ">
+      <Header />
       <Canvas>
         <color attach="background" args={["black"]} />
         <OrbitControls
@@ -26,10 +28,6 @@ function App() {
           minPolarAngle={Math.PI / 2}
           maxPolarAngle={Math.PI / 2}
         />
-
-        <ambientLight intensity={0.5} />
-        <directionalLight color={"white"} position={[20, 10, 10]} />
-
         <MoonMesh />
         {stars.map((s, index) => {
           return <StarMesh key={index} position={s.position} size={s.size} />;

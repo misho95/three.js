@@ -8,9 +8,8 @@ const MoonMesh = () => {
       <group>
         <mesh>
           <sphereGeometry args={[1.5, 64, 32]} />
-          <meshStandardMaterial color={"white"} map={loadedTexture} />
+          <meshBasicMaterial color={"white"} map={loadedTexture} />
         </mesh>
-        <hemisphereLight args={[0xffffbb, 0x080820, 1]} />
       </group>
     </>
   );
