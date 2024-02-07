@@ -1,6 +1,6 @@
 import { useSpring, animated } from "@react-spring/web";
 import { useState } from "react";
-import { usePlanet } from "../utils/global.store";
+import { PlanetType, useDark, usePlanet } from "../utils/global.store";
 
 const Header = () => {
   const animatedHeader = useSpring({
@@ -17,15 +17,20 @@ const Header = () => {
       id: 2,
       value: "mars",
     },
+    {
+      id: 3,
+      value: "earth",
+    },
   ];
 
   const [show, setShow] = useState(false);
+  const { dark, setDark } = useDark();
   const { planet, setPlanet } = usePlanet();
 
   return (
     <animated.header
       style={{ ...animatedHeader }}
-      className="fixed top-0 w-full p-[30px] text-white z-50"
+      className="fixed top-0 w-full p-[30px] text-white z-50 flex justify-between"
     >
       <div className="relative w-fit h-fit">
         <button
@@ -40,7 +45,7 @@ const Header = () => {
               return (
                 <span
                   onClick={() => {
-                    setPlanet(p.value), setShow(false);
+                    setPlanet(p.value as PlanetType), setShow(false);
                   }}
                   className="cursor-pointer"
                 >
@@ -51,6 +56,14 @@ const Header = () => {
           </div>
         )}
       </div>
+      {planet === "earth" && (
+        <button
+          onClick={() => setDark()}
+          className="font-bold font-mono text-[28px]"
+        >
+          {dark ? "DAY" : "NIGHT"}
+        </button>
+      )}
     </animated.header>
   );
 };
