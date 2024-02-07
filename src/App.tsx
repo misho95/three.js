@@ -3,11 +3,14 @@ import { OrbitControls } from "@react-three/drei";
 import MoonMesh from "./component/moon";
 import StarMesh from "./component/star.mesh";
 
-const positions = Array.from({ length: 1000 }, (_, index) => [
-  Math.random() * 20 - 10, // Random X position between -10 and 10
-  Math.random() * 20 - 10, // Random Y position between -10 and 10
-  Math.random() * 20 - 10, // Random Z position between -10 and 10
-]);
+const stars = Array.from({ length: 1000 }, (_, index) => ({
+  position: [
+    Math.random() * 20 - 10,
+    Math.random() * 20 - 10,
+    Math.random() * 20 - 10,
+  ],
+  size: Math.random() * 0.01,
+}));
 
 function App() {
   return (
@@ -28,8 +31,8 @@ function App() {
         <directionalLight color={"white"} position={[20, 10, 10]} />
 
         <MoonMesh />
-        {positions.map((position, index) => {
-          return <StarMesh key={index} position={position} />;
+        {stars.map((s, index) => {
+          return <StarMesh key={index} position={s.position} size={s.size} />;
         })}
       </Canvas>
     </div>

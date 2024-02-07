@@ -1,14 +1,16 @@
 type PropsType = {
   position: any;
+  size: any;
 };
 
-const StarMesh = ({ position }: PropsType) => {
+const StarMesh = ({ position, size }: PropsType) => {
   return (
     <group>
       <mesh position={position}>
-        <sphereGeometry args={[0.01, 32, 32]} />
-        <meshStandardMaterial color="white" metalness={1} roughness={0} />
+        <sphereGeometry args={[size, 32, 32]} />
+        <meshStandardMaterial color="white" metalness={0.7} roughness={100} />
       </mesh>
+      <lightProbe />
     </group>
   );
 };
