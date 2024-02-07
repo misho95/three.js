@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import MoonMesh from "./component/moon";
+import PlanetMesh from "./component/planet";
 import StarMesh from "./component/star.mesh";
 import Header from "./component/header";
 
@@ -28,7 +28,7 @@ function App() {
           minPolarAngle={Math.PI / 2}
           maxPolarAngle={Math.PI / 2}
         />
-        <MoonMesh />
+        <PlanetMesh />
         {stars.map((s, index) => {
           return <StarMesh key={index} position={s.position} size={s.size} />;
         })}
